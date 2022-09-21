@@ -1,0 +1,2 @@
+user = admin
+pw = admin
