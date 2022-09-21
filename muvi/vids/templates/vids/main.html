@@ -1,0 +1,22 @@
+{% extends 'vids/base.html' %}
+{% load static %}
+{% block title%} Home {% endblock %}
+{%block body%}
+
+  <div class= container mt-5>
+    {% for video in videos %}
+    <h3 class='text-center mt-3'>{{video.caption}}</h3>
+    <video class="embed-responsive-16by9  embed-responsive " style='max-height: 17rem; min-width: -webkit-fill-available; 'controls='controls'>
+        <source src="{{video.reel.url}}" type="video/mp4" />
+    </video>   
+    <p> {{video.desc}} </p>
+    <hr>
+      {% endfor %}
+  </div>
+ 
+{% endblock %}
+ 
+
+
+
+
