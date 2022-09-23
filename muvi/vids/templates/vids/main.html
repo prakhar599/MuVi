@@ -30,13 +30,22 @@
   <div onclick="togglePopup()" class="close-btn">
       X
   </div>
-  <h3>Chose upload method</h3>
+  <h3>What's up?</h3>
   <hr>
 
-  <button class="button-88" role="button">By Muvi Cam</button><br>
-  <button class="button-88" role="button">From Storage</button>
+  <button class="button-88" role="button">Post by Muvi Cam</button><hr>
+  <button class="button-88" role="button" onclick="togglePopup();togglePopup1()">Post from Storage</button><br>
+  <form action="#" style='margin-right: 50rem;'>
+    <label for="cap">caption:</label>
+    <textarea name="caption" rows="2" cols="50" value='cap'></textarea><br>
+    <label for="desc">description:</label>
+    <textarea name="description" rows="4" cols="50" value='desc'></textarea><br>
 
+    <input type='submit' value='submit'></input>
+  </form>  
+    
 </div>
+
 
 
 <script type="text/javascript" src="{% static 'vids/js/main.js' %}"></script>
