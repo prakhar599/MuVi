@@ -1,0 +1,3 @@
+function togglePopup() {
+    $(".content").toggle();
+}

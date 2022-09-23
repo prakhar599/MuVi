@@ -1,32 +1,52 @@
 {% extends 'vids/base.html' %}
-{% load static %}
-{% block title%} Home {% endblock %}
-{%block body%}
-
-  <div class= container mt-5>
-    {% for video in videos %}
-    <h3 class='text-center mt-3'>{{video.caption}}</h3>
-    <video class="embed-responsive-16by9  embed-responsive " style='max-height: 17rem; min-width: -webkit-fill-available; 'controls='controls'>
-        <source src="{{video.reel.url}}" type="video/mp4" />
-    </video>   
-    <p> {{video.desc}} </p>
-    <hr>
-      {% endfor %}
-  </div>
-
-  <div style=' position: fixed;
-  bottom: 24px;
-  right: 108px;'>
-    <button style='background-color : #31B0D5;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 4px;
-    border-color: #46b8da;'>Upload reel</button>
-  </div> 
-  
+{% load static %} 
+{%block css %} 
+{{ block.super}}
+<link href="{% static 'vids/css/main.css' %}" rel="stylesheet" />
 {% endblock %}
- 
+{% block title%} Home {% endblock %}
+
+{%block body%}
+<div class="container" mt-5>
+  {% for video in videos %}
+  <h3 class="text-center mt-3">{{video.caption}}</h3>
+  <video
+    class="embed-responsive-16by9 embed-responsive"
+    style="max-height: 17rem; min-width: -webkit-fill-available"
+    controls="controls"
+  >
+    <source src="{{video.reel.url}}" type="video/mp4" />
+  </video>
+  <p>{{video.desc}}</p>
+  <hr />
+  {% endfor %}
+</div>
+
+<div style="position: fixed; bottom: 24px; right: 108px">
+    <button class="button-73" role="button" onclick="togglePopup()">Upload</button>
+</div> 
+
+<div class="content">
+  <div onclick="togglePopup()" class="close-btn">
+      X
+  </div>
+  <h3>Popup</h3>
+
+  <p>
+      jQuery is an open source JavaScript library 
+      that simplifies the interactions between an
+      HTML/CSS document, or more precisely the 
+      Document Object Model (DOM), and JavaScript.
+      Elaborating the terms, jQuery simplifies 
+      HTML document traversing and manipulation, 
+      browser event handling, DOM animations, 
+      Ajax interactions, and cross-browser 
+      JavaScript development.
+  </p>
+</div>
 
 
+<script type="text/javascript" src="{% static 'vids/js/main.js' %}"></script>
 
 
+{% endblock %}
