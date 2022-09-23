@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import reels,User
+from .models import reels
 admin.site.register(reels)
-admin.site.register(User)
+
 
 # @admin.register(reels)
 # class reelsAdmin(admin.ModelAdmin):

@@ -51,18 +51,8 @@
             </li>
           </ul>
           <!-- Left links -->
+          {% if user.is_authenticated %}
 
-          <div class="d-flex align-items-center">
-            <button
-              type="button"
-              class="btn btn-link px-3 me-2"
-              onclick="welcome()"
-            >
-              Login
-            </button>
-            <button type="button" class="btn btn-primary me-3">
-              <a class="nav-link" href="signup"> Sign up for free </a>
-            </button>
 
             <ul class="navbar-nav">
               <!-- Avatar -->
@@ -84,6 +74,21 @@
                   />
                 </a>
               </li>
+              {% else %}
+
+              <div class="d-flex align-items-center">
+                <button
+                  type="button"
+                  class="btn btn-link px-3 me-2"
+                  onclick="welcome()"
+                >
+                  Login
+                </button>
+                <button type="button" class="btn btn-primary me-3">
+                  <a class="nav-link" href="signup"> Sign up for free </a>
+                </button>
+  
+              {% endif %}
             </ul>
           </div>
         </div>

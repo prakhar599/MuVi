@@ -1,11 +1,16 @@
 from django.shortcuts import render
 from django.views import View
 from django.shortcuts import render,redirect
-from .models import reels,User
-from .forms import userRegister
+from .models import reels
+from .forms import userRegister,loginForm
 from  django.http import HttpResponse
 import numpy as np
 import cv2 as cv
+from django.contrib.auth import authenticate,login as auth_login,logout as auth_logout
+from django.contrib import messages 
+from django.contrib.auth.models import User
+
+
 
 
 class mypage(View):
@@ -24,10 +29,10 @@ class register(View):
     def post(self,request):
         fm = userRegister(request.POST)
         if fm.is_valid():
-            nm = fm.cleaned_data['name']
+            nm = fm.cleaned_data['username']
             em = fm.cleaned_data['email']
             pw = fm.cleaned_data['password']
-            reg = User(name = nm, email=em, password=pw)
+            reg = User.objects.create_user(username = nm, email=em, password=pw)
             reg.save()
             return redirect('/vids')
         
@@ -64,7 +69,29 @@ class upload(View):
 
     
     def post(self,request):
-            return redirect('/vids')        
+            return redirect('/vids')     
+        
+class login(View):
+    def post(self,request):     
+        name = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")     
+        user = authenticate(request , username = name, password=password)
+        if user is not None:
+            auth_login(request, user)
+            messages.success(request,'logging in successful !')
+            return redirect('/vids') 
+        else:
+            messages.warning(request,' Incorrect Credentials or account does not exist')
+            return render(request,'vids/failure.html')
+                       
+    def get(self,request):
+        form = loginForm()     
+        return render(request,'vids/login.html',context = {'form':form})
+    
+def logout(request):
+    auth_logout(request)
+    return redirect('/vids')               
     
    
     

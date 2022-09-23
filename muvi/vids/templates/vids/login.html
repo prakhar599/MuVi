@@ -1,0 +1,32 @@
+{% extends 'vids/base.html' %}
+{% load static %}
+{% block body %} 
+
+
+{% if user.is_authenticated %}
+    {% if messages %}  
+    <ul>   
+        {% for message in messages %}  
+            <li>{{ message }}</li>  
+            {% endfor %}  
+    </ul>   
+    {% endif %}
+    <p><a href="{% url 'mypage' %}">Enjoy our app!</a></p>
+
+{% else %}
+
+    {% if form.errors %}
+        {{ form.errors }}
+    {% endif %}
+
+    <form method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit" >Submit</button>
+    </form>
+    <p>Not a member? <a href="{% url 'signup' %}">Sign up now!</a></p>
+    
+{% endif %}    
+    
+    
+{% endblock %}
