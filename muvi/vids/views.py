@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.shortcuts import render,redirect
 from .models import reels
-from .forms import userRegister,loginForm
+from .forms import userRegister,loginForm,videoForm
 from  django.http import HttpResponse
 import numpy as np
 import cv2 as cv
@@ -15,11 +15,21 @@ from django.contrib.auth.models import User
 
 class mypage(View):
     def get(self,request):
-        videos = reels.objects.all()
-        return render(request,'vids/main.html',{'videos':videos})
+        videos = reels.objects.all()     
+        form = videoForm()   
+        return render(request,'vids/main.html',context = {'form':form ,'videos':videos})  
     
     def post(self,request):
-        return
+        fm =  videoForm(data=request.POST,files=request.FILES)
+        print('file val',request.FILES)
+        print(request.POST)
+        
+        if fm.is_valid():
+            fm.save()
+            print('hi')
+            return redirect('/vids/')
+              
+
     
 class register(View):
     def get(self,request):
@@ -91,7 +101,10 @@ class login(View):
     
 def logout(request):
     auth_logout(request)
-    return redirect('/vids')               
+    return redirect('/vids')
+
+
+
     
    
     

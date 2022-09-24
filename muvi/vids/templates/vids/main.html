@@ -35,12 +35,17 @@
 
   <button class="button-88" role="button">Post by Muvi Cam</button><hr>
   <button class="button-88" role="button" onclick="togglePopup()">Post from Storage</button><br>
-  <form action="#" style='margin-right: 50rem;'>
-    <label for="cap">caption:</label>
+
+  <form action="" method='POST' style='margin-right: 50rem;' enctype='multipart/form-data'>
+    {% csrf_token %}
+    {% for field in form %}
+    {{ field.label_tag }}{{ field }}
+    {% endfor %}<br><br>
+    {% comment %} <label for="cap">caption:</label>
     <textarea name="caption" rows="2" cols="50" value='cap'></textarea><br>
     <label for="desc">description:</label>
     <textarea name="description" rows="4" cols="50" value='desc'></textarea><br>
-
+     {% endcomment %}
     <input type='submit' value='submit'></input>
   </form>  
     
