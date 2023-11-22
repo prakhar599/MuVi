@@ -1,3 +1,3 @@
-Just playing around
+ye sab hatao 
 user = admin
 pw = admin
